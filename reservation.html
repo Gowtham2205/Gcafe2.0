@@ -40,11 +40,17 @@
             text-decoration: none;
         }
 
+        /* Updated menu-toggle styles */
         .menu-toggle {
             display: none;
             color: white;
             font-size: 1.5rem;
             cursor: pointer;
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1001;
         }
 
         nav ul {
@@ -64,8 +70,7 @@
         nav a:hover {
             color: #e67e22;
         }
-
-        .overlay {
+                .overlay {
             display: none;
             position: fixed;
             top: 0;
@@ -104,6 +109,7 @@
             margin: 0 auto;
             padding: 0 1rem;
         }
+
         /* Reservation Container Styles */
         .reservation-container {
             max-width: 800px;
@@ -175,8 +181,7 @@
         .submit-btn:hover {
             background: #d35400;
         }
-
-        .location-select {
+                .location-select {
             margin-bottom: 2rem;
         }
 
@@ -259,16 +264,8 @@
             }
 
             .menu-toggle {
-    display: none;
-    color: white;
-    font-size: 1.5rem;
-    cursor: pointer;
-    position: absolute;  /* Added */
-    right: 20px;        /* Added */
-    top: 50%;           /* Added */
-    transform: translateY(-50%); /* Added */
-    z-index: 1001;      /* Added */
-}
+                display: block;
+            }
 
             nav ul {
                 position: fixed;
@@ -389,8 +386,7 @@
                 </div>
             </div>
         </div>
-
-        <form id="reservationForm">
+                <form id="reservationForm">
             <div class="form-grid">
                 <div class="form-group">
                     <label for="name">Full Name *</label>
