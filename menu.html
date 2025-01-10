@@ -16,11 +16,11 @@
 
         body {
             line-height: 1.6;
-            background-color: #f9f9f9;
             padding-top: 80px;
+            min-height: 100vh;
+            background: #f9f9f9;
         }
 
-        /* Header Styles */
         header {
             background: #1a1a1a;
             padding: 1.2rem 5%;
@@ -42,13 +42,14 @@
         }
 
         .menu-toggle {
-            position: fixed;
-            right: 20px;
-            top: 20px;
+            display: none;
             color: white;
             font-size: 1.5rem;
             cursor: pointer;
-            display: none;
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
             z-index: 1001;
         }
 
@@ -69,56 +70,47 @@
         nav a:hover {
             color: #e67e22;
         }
-
-        /* Menu Categories */
+                /* Menu Categories */
         .menu-categories {
             display: flex;
-            flex-direction: column;
-            gap: 2rem;
-            margin: 2rem 0;
-            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            padding: 2rem 1rem;
+            flex-wrap: wrap;
         }
 
         .category-btn {
-            background: #e67e22;
-            color: white;
-            border: none;
-            padding: 1rem 2rem;
-            border-radius: 25px;
+            background: white;
+            border: 2px solid #e67e22;
+            padding: 0.8rem 1.5rem;
+            border-radius: 30px;
             cursor: pointer;
-            font-size: 1.1rem;
             font-weight: 500;
             transition: all 0.3s;
-            width: 200px;
-            text-align: center;
+            color: #e67e22;
         }
 
-        .category-btn:hover {
-            background: #d35400;
-            transform: translateY(-2px);
-        }
-
+        .category-btn:hover,
         .category-btn.active {
-            background: #d35400;
+            background: #e67e22;
+            color: white;
         }
 
-        /* Menu Sections */
+        /* Menu Grid */
         .menu-section {
             display: none;
-            padding: 2rem 5%;
-            max-width: 1200px;
-            margin: 0 auto;
+            padding: 0 5%;
         }
 
         .menu-section.active {
             display: block;
         }
 
-        /* Menu Grid */
         .menu-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2.5rem;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 2rem 0;
         }
 
         .menu-item {
@@ -134,7 +126,6 @@
         }
 
         .menu-image {
-            width: 100%;
             height: 200px;
             overflow: hidden;
         }
@@ -147,45 +138,103 @@
         }
 
         .menu-item:hover .menu-image img {
-            transform: scale(1.05);
+            transform: scale(1.1);
         }
 
         .menu-content {
             padding: 1.5rem;
         }
 
-        .menu-item h3 {
-            font-size: 1.3rem;
-            color: #333;
+        .menu-content h3 {
+            font-size: 1.2rem;
             margin-bottom: 0.5rem;
+            color: #333;
         }
 
-        .menu-description {
+        .menu-content p {
             color: #666;
+            font-size: 0.9rem;
             margin-bottom: 1rem;
-            font-size: 0.95rem;
         }
 
         .menu-footer {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
             flex-direction: column;
-            gap: 1rem;
+            gap: 10px;
         }
 
         .menu-price {
-            color: #e67e22;
-            font-weight: 600;
             font-size: 1.2rem;
+            font-weight: 600;
+            color: #e67e22;
+        }
+
+        /* Updated Menu Actions Styles */
+        .menu-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+        }
+
+        .add-to-cart {
+            flex: 1;
+            background: #e67e22;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            transition: background 0.3s;
+        }
+
+        .add-to-cart:hover {
+            background: #d35400;
+        }
+
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: #f5f5f5;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+
+        .quantity-btn {
+            background: #e67e22;
+            color: white;
+            border: none;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: background 0.3s;
+        }
+
+        .quantity-btn:hover {
+            background: #d35400;
+        }
+
+        .quantity-display {
+            min-width: 30px;
+            text-align: center;
+            font-weight: 500;
         }
                 /* Cart Styles */
         .cart-icon {
             position: fixed;
-            bottom: 2rem;
-            right: 2rem;
+            bottom: 30px;
+            right: 30px;
             background: #e67e22;
-            color: white;
             width: 60px;
             height: 60px;
             border-radius: 50%;
@@ -193,14 +242,17 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            transition: all 0.3s;
-            z-index: 997;
             box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            transition: transform 0.3s;
         }
 
         .cart-icon:hover {
             transform: scale(1.1);
-            background: #d35400;
+        }
+
+        .cart-icon i {
+            color: white;
+            font-size: 1.5rem;
         }
 
         .cart-count {
@@ -209,8 +261,8 @@
             right: -5px;
             background: #e74c3c;
             color: white;
-            width: 24px;
-            height: 24px;
+            width: 25px;
+            height: 25px;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -221,54 +273,46 @@
 
         .cart-modal {
             position: fixed;
-            top: 0;
-            right: -400px;
-            width: 90%;
-            max-width: 400px;
-            height: 100vh;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             background: white;
             padding: 2rem;
-            transition: right 0.3s ease;
-            z-index: 999;
-            display: flex;
-            flex-direction: column;
-            box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+            border-radius: 15px;
+            width: 90%;
+            max-width: 500px;
+            max-height: 80vh;
+            overflow-y: auto;
+            z-index: 1002;
+            display: none;
         }
 
         .cart-modal.active {
-            right: 0;
+            display: block;
         }
 
         .cart-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 2rem;
-            padding-bottom: 1rem;
-            border-bottom: 1px solid #eee;
+            margin-bottom: 1.5rem;
         }
 
-        .cart-title {
+        .cart-header h2 {
             font-size: 1.5rem;
-            font-weight: 600;
             color: #333;
         }
 
         .close-cart {
+            background: none;
+            border: none;
             font-size: 1.5rem;
             cursor: pointer;
             color: #666;
-            transition: color 0.3s;
-        }
-
-        .close-cart:hover {
-            color: #e67e22;
         }
 
         .cart-items {
-            flex: 1;
-            overflow-y: auto;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
         }
 
         .cart-item {
@@ -278,23 +322,26 @@
             border-bottom: 1px solid #eee;
         }
 
-        .cart-item img {
+        .cart-item-image {
             width: 80px;
             height: 80px;
-            object-fit: cover;
             border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .cart-item-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         .cart-item-details {
             flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
         }
 
-        .cart-item-title {
-            font-size: 1.1rem;
-            color: #333;
+        .cart-item-name {
+            font-weight: 500;
+            margin-bottom: 0.3rem;
         }
 
         .cart-item-price {
@@ -302,27 +349,10 @@
             font-weight: 500;
         }
 
-        .cart-item-quantity {
+        .cart-quantity {
             display: flex;
             align-items: center;
-            gap: 0.8rem;
-        }
-
-        .quantity-btn {
-            background: #f0f0f0;
-            border: none;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .quantity-btn:hover {
-            background: #e0e0e0;
+            gap: 0.5rem;
         }
 
         .cart-total {
@@ -332,8 +362,6 @@
             font-size: 1.2rem;
             font-weight: 600;
             margin-bottom: 1.5rem;
-            padding-top: 1rem;
-            border-top: 2px solid #eee;
         }
 
         .checkout-btn {
@@ -342,34 +370,14 @@
             border: none;
             padding: 1rem;
             border-radius: 8px;
-            cursor: pointer;
-            font-weight: 500;
-            transition: all 0.3s;
             width: 100%;
             font-size: 1.1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.3s;
         }
 
         .checkout-btn:hover {
-            background: #d35400;
-        }
-
-        .add-to-cart {
-            background: #e67e22;
-            color: white;
-            border: none;
-            padding: 0.8rem 1.5rem;
-            border-radius: 25px;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-weight: 500;
-            width: 100%;
-            justify-content: center;
-        }
-
-        .add-to-cart:hover {
             background: #d35400;
         }
 
@@ -380,16 +388,74 @@
             width: 100%;
             height: 100%;
             background: rgba(0,0,0,0.5);
+            z-index: 1001;
             display: none;
-            z-index: 998;
         }
 
         .overlay.active {
             display: block;
         }
+                /* Notification Styles */
+        #notification {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #e67e22;
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            display: none;
+            z-index: 1003;
+            text-align: center;
+        }
+
+        #notification.show {
+            display: block;
+            animation: slideDown 0.5s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translate(-50%, -100%);
+                opacity: 0;
+            }
+            to {
+                transform: translate(-50%, 0);
+                opacity: 1;
+            }
+        }
+
+        /* Success Message */
+        .success-message {
+            background: #2ecc71;
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 1rem;
+            display: none;
+        }
+
+        .success-message.show {
+            display: block;
+        }
 
         /* Responsive Design */
         @media screen and (max-width: 768px) {
+            body {
+                padding-top: 60px;
+            }
+
+            header {
+                padding: 1rem;
+            }
+
+            .logo {
+                font-size: 1.5rem;
+            }
+
             .menu-toggle {
                 display: block;
             }
@@ -406,24 +472,46 @@
                 justify-content: center;
                 transition: 0.3s ease-in-out;
                 z-index: 1000;
-                gap: 2rem;
             }
 
             nav ul.active {
                 left: 0;
             }
 
+            nav ul li {
+                margin: 1.5rem 0;
+            }
+
+            .menu-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                padding: 1rem;
+            }
+
+            .cart-icon {
+                bottom: 20px;
+                right: 20px;
+                width: 50px;
+                height: 50px;
+            }
+
+            .cart-modal {
+                width: 95%;
+                padding: 1rem;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
             .menu-grid {
                 grid-template-columns: 1fr;
             }
 
-            .cart-modal {
-                width: 100%;
-                max-width: none;
+            .category-btn {
+                padding: 0.6rem 1rem;
+                font-size: 0.9rem;
             }
         }
     </style>
-    </head>
+</head>
 <body>
     <header>
         <a href="newcode.html" class="logo">Gcafe</a>
@@ -440,305 +528,238 @@
             </ul>
         </nav>
     </header>
-
-    <div class="menu-categories">
-        <button class="category-btn active" data-category="hot-coffee">Hot Coffee</button>
-        <button class="category-btn" data-category="cold-coffee">Cold Coffee</button>
-        <button class="category-btn" data-category="pastries">Pastries</button>
+        <div class="menu-categories">
+        <button class="category-btn active" data-category="all">All</button>
+        <button class="category-btn" data-category="breakfast">Breakfast</button>
+        <button class="category-btn" data-category="lunch">Lunch</button>
+        <button class="category-btn" data-category="dinner">Dinner</button>
+        <button class="category-btn" data-category="desserts">Desserts</button>
+        <button class="category-btn" data-category="beverages">Beverages</button>
     </div>
 
-    <!-- Hot Coffee Section -->
-     <section id="hot-coffee" class="menu-section active">
+    <div class="menu-section active" id="all">
         <div class="menu-grid">
-            <div class="menu-item" data-id="h1">
+            <!-- Menu Item 1 -->
+            <div class="menu-item" data-id="1" data-category="breakfast">
                 <div class="menu-image">
-                    <img src="https://images.unsplash.com/photo-1541167760496-1628856ab772" alt="Espresso">
-                </div>
-                <div class="menu-content">
-                    <h3>Classic Espresso</h3>
-                    <p>Rich and intense single shot of pure coffee</p>
-                    <div class="menu-footer">
-                        <span class="menu-price">₹120</span>
-                        <button class="add-to-cart">Add to Cart</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="menu-item" data-id="h2">
-                <div class="menu-image">
-                    <img src="https://images.unsplash.com/photo-1572442388796-11668a67e53d" alt="Cappuccino">
-                </div>
-                <div class="menu-content">
-                    <h3>Cappuccino</h3>
-                    <p>Espresso with steamed milk foam</p>
-                    <div class="menu-footer">
-                        <span class="menu-price">₹150</span>
-                        <button class="add-to-cart">Add to Cart</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="menu-item" data-id="h3">
-                <div class="menu-image">
-                    <img src="https://images.unsplash.com/photo-1610889556528-9a770e32642f" alt="Latte">
-                </div>
-                <div class="menu-content">
-                    <h3>Caramel Latte</h3>
-                    <p>Espresso with caramel and steamed milk</p>
-                    <div class="menu-footer">
-                        <span class="menu-price">₹180</span>
-                        <button class="add-to-cart">Add to Cart</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="menu-item" data-id="h4">
-                <div class="menu-image">
-                    <img src="https://images.unsplash.com/photo-1585494156145-1c60a4fe952b" alt="Mocha">
-                </div>
-                <div class="menu-content">
-                    <h3>Hot Mocha</h3>
-                    <p>Espresso with chocolate and steamed milk</p>
-                    <div class="menu-footer">
-                        <span class="menu-price">₹190</span>
-                        <button class="add-to-cart">Add to Cart</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-       <!-- Cold Coffee Section -->
-    <section id="cold-coffee" class="menu-section">
-        <div class="menu-grid">
-            <div class="menu-item" data-id="c1">
-                <div class="menu-image">
-                    <img src="https://images.unsplash.com/photo-1517701604599-bb29b565090c" alt="Iced Americano">
-                </div>
-                <div class="menu-content">
-                    <h3>Iced Americano</h3>
-                    <p>Chilled espresso with cold water</p>
-                    <div class="menu-footer">
-                        <span class="menu-price">₹140</span>
-                        <button class="add-to-cart">Add to Cart</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="menu-item" data-id="c2">
-                <div class="menu-image">
-                    <img src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735" alt="Frappuccino">
-                </div>
-                <div class="menu-content">
-                    <h3>Chocolate Frappuccino</h3>
-                    <p>Blended coffee with chocolate and cream</p>
-                    <div class="menu-footer">
-                        <span class="menu-price">₹220</span>
-                        <button class="add-to-cart">Add to Cart</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="menu-item" data-id="c3">
-                <div class="menu-image">
-                    <img src="https://images.unsplash.com/photo-1499961024600-ad094db305cc" alt="Cold Brew">
-                </div>
-                <div class="menu-content">
-                    <h3>Cold Brew</h3>
-                    <p>Slow-steeped coffee served over ice</p>
-                    <div class="menu-footer">
-                        <span class="menu-price">₹160</span>
-                        <button class="add-to-cart">Add to Cart</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="menu-item" data-id="c4">
-                <div class="menu-image">
-                    <img src="https://images.unsplash.com/photo-1592663527359-cf6642f54cff" alt="Iced Latte">
-                </div>
-                <div class="menu-content">
-                    <h3>Iced Caramel Latte</h3>
-                    <p>Chilled espresso with caramel and milk</p>
-                    <div class="menu-footer">
-                        <span class="menu-price">₹200</span>
-                        <button class="add-to-cart">Add to Cart</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Pastries Section -->
-    <section id="pastries" class="menu-section">
-        <div class="menu-grid">
-            <div class="menu-item" data-id="p1">
-                <div class="menu-image">
-                    <img src="https://images.unsplash.com/photo-1530610476181-d83430b64dcd" alt="Chocolate Croissant">
-                </div>
-                <div class="menu-content">
-                    <h3>Chocolate Croissant</h3>
-                    <p>Flaky pastry filled with rich chocolate</p>
-                    <div class="menu-footer">
-                        <span class="menu-price">₹90</span>
-                        <button class="add-to-cart">Add to Cart</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="menu-item" data-id="p2">
-                <div class="menu-image">
-                    <img src="https://images.unsplash.com/photo-1587668178277-295251f900ce" alt="Apple Danish">
+                    <img src="path/to/apple-danish.jpg" alt="Apple Danish">
                 </div>
                 <div class="menu-content">
                     <h3>Apple Danish</h3>
                     <p>Sweet pastry with caramelized apples</p>
                     <div class="menu-footer">
                         <span class="menu-price">₹110</span>
-                        <button class="add-to-cart">Add to Cart</button>
+                        <div class="menu-actions">
+                            <button class="add-to-cart" onclick="addToCart(1, 'Apple Danish', 110, 'path/to/apple-danish.jpg')">
+                                <i class="fas fa-shopping-cart"></i>
+                                Add to Cart
+                            </button>
+                            <div class="quantity-controls">
+                                <button class="quantity-btn minus">-</button>
+                                <span class="quantity-display">1</span>
+                                <button class="quantity-btn plus">+</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div class="menu-item" data-id="p3">
-                <div class="menu-image">
-                    <img src="https://images.unsplash.com/photo-1605807646983-377bc5a76493" alt="Almond Croissant">
-                </div>
-                <div class="menu-content">
-                    <h3>Almond Croissant</h3>
-                    <p>Buttery croissant with almond filling</p>
-                    <div class="menu-footer">
-                        <span class="menu-price">₹150</span>
-                        <button class="add-to-cart">Add to Cart</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="menu-item" data-id="p4">
-                <div class="menu-image">
-                    <img src="https://images.unsplash.com/photo-1509365465985-25d11c17e812" alt="Cinnamon Roll">
-                </div>
-                <div class="menu-content">
-                    <h3>Cinnamon Roll</h3>
-                    <p>Classic pastry with cinnamon filling</p>
-                    <div class="menu-footer">
-                        <span class="menu-price">₹130</span>
-                        <button class="add-to-cart">Add to Cart</button>
-                    </div>
-                </div>
-            </div>
+            <!-- Add more menu items with the same structure -->
         </div>
-    </section>
-    <section id="pastries" class="menu-section">
-        <div class="menu-grid">
-         <div class="menu-item" data-id="p1">
-    <img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a" alt="Chocolate Croissant">
-    <div class="menu-item-content">
-        <h3>Chocolate Croissant</h3>
-                    <div class="menu-price">₹120</div>
-                    <p class="menu-description">Buttery croissant with chocolate filling</p>
-                    <button class="add-to-cart">
-                        <i class="fas fa-shopping-cart"></i>
-                        Add to Cart
-                    </button>
-                </div>
-            </div>
-          <div class="menu-item" data-id="p2">
-    <img src="https://images.unsplash.com/photo-1587830076295-3241cffc0d85" alt="Blueberry Muffin">
-    <div class="menu-item-content">
-        <h3>Blueberry Muffin</h3>
-                    <div class="menu-price">₹100</div>
-                    <p class="menu-description">Fresh baked muffin with blueberries</p>
-                    <button class="add-to-cart">
-                        <i class="fas fa-shopping-cart"></i>
-                        Add to Cart
-                    </button>
-                </div>
-            </div>
-            <div class="menu-item" data-id="p3">
-    <img src="https://images.unsplash.com/photo-1586724237569-f3d0c1dee8c6" alt="Danish Pastry">
-    <div class="menu-item-content">
-        <h3>Danish Pastry</h3>
-                    <div class="menu-price">₹110</div>
-                    <p class="menu-description">Sweet pastry with fruit filling</p>
-                    <button class="add-to-cart">
-                        <i class="fas fa-shopping-cart"></i>
-                        Add to Cart
-                    </button>
-                </div>
-            </div>
-           <div class="menu-item" data-id="p4">
-    <img src="https://images.unsplash.com/photo-1509365390695-33aee754301f" alt="Cinnamon Roll">
-    <div class="menu-item-content">
-        <h3>Cinnamon Roll</h3>
-                    <div class="menu-price">₹130</div>
-                    <p class="menu-description">Sweet roll with cinnamon-sugar filling</p>
-                    <button class="add-to-cart">
-                        <i class="fas fa-shopping-cart"></i>
-                        Add to Cart
-                    </button>
-                </div>
-            </div>
-        </div>
-    </section>
+    </div>
 
     <!-- Cart Icon -->
-    <div class="cart-icon">
+    <div class="cart-icon" id="cartIcon">
         <i class="fas fa-shopping-cart"></i>
         <span class="cart-count">0</span>
     </div>
 
     <!-- Cart Modal -->
-    <div class="cart-modal">
+    <div class="cart-modal" id="cartModal">
         <div class="cart-header">
-            <h2 class="cart-title">Your Cart</h2>
-            <span class="close-cart">&times;</span>
+            <h2>Your Cart</h2>
+            <button class="close-cart" id="closeCart">
+                <i class="fas fa-times"></i>
+            </button>
         </div>
-        <div class="cart-items"></div>
+        <div class="cart-items">
+            <!-- Cart items will be dynamically added here -->
+        </div>
         <div class="cart-total">
             <span>Total:</span>
             <span class="total-amount">₹0</span>
         </div>
-        <button class="checkout-btn">Proceed to Checkout</button>
+        <button class="checkout-btn" onclick="checkout()">
+            Proceed to Checkout
+        </button>
     </div>
 
-    <div class="overlay"></div>
+    <!-- Overlay -->
+    <div class="overlay" id="overlay"></div>
 
-    <script>
-        // Cart functionality
-        let cart = [];
-        const cartIcon = document.querySelector('.cart-icon');
-        const cartModal = document.querySelector('.cart-modal');
-        const overlay = document.querySelector('.overlay');
-        const closeCart = document.querySelector('.close-cart');
-        const cartItems = document.querySelector('.cart-items');
-        const cartCount = document.querySelector('.cart-count');
-        const totalAmount = document.querySelector('.total-amount');
-
+    <!-- Notification -->
+    <div id="notification"></div>
+        <script>
         // Mobile Menu Toggle
         const menuToggle = document.getElementById('menuToggle');
         const navMenu = document.querySelector('nav ul');
+        const overlay = document.getElementById('overlay');
 
         menuToggle.addEventListener('click', () => {
             navMenu.classList.toggle('active');
             overlay.classList.toggle('active');
         });
 
-        // Category switching
+        // Category Filtering
         const categoryBtns = document.querySelectorAll('.category-btn');
-        const menuSections = document.querySelectorAll('.menu-section');
+        const menuItems = document.querySelectorAll('.menu-item');
 
         categoryBtns.forEach(btn => {
             btn.addEventListener('click', () => {
+                // Remove active class from all buttons
                 categoryBtns.forEach(b => b.classList.remove('active'));
-                menuSections.forEach(s => s.classList.remove('active'));
-                
+                // Add active class to clicked button
                 btn.classList.add('active');
-                document.getElementById(btn.dataset.category).classList.add('active');
+
+                const category = btn.dataset.category;
+                
+                menuItems.forEach(item => {
+                    if (category === 'all' || item.dataset.category === category) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
             });
         });
 
-        // Cart Toggle
+        // Cart Functionality
+        let cart = [];
+        const cartIcon = document.getElementById('cartIcon');
+        const cartModal = document.getElementById('cartModal');
+        const closeCart = document.getElementById('closeCart');
+        const cartCount = document.querySelector('.cart-count');
+        const cartItems = document.querySelector('.cart-items');
+        const totalAmount = document.querySelector('.total-amount');
+
+        // Quantity Controls
+        document.querySelectorAll('.quantity-controls').forEach(control => {
+            const minusBtn = control.querySelector('.minus');
+            const plusBtn = control.querySelector('.plus');
+            const display = control.querySelector('.quantity-display');
+            let quantity = 1;
+
+            minusBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                if (quantity > 1) {
+                    quantity--;
+                    display.textContent = quantity;
+                }
+            });
+
+            plusBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                quantity++;
+                display.textContent = quantity;
+            });
+        });
+
+        // Add to Cart Function
+        function addToCart(id, name, price, image) {
+            const menuItem = document.querySelector(`[data-id="${id}"]`);
+            const quantity = parseInt(menuItem.querySelector('.quantity-display').textContent);
+            
+            const existingItem = cart.find(item => item.id === id);
+
+            if (existingItem) {
+                existingItem.quantity += quantity;
+            } else {
+                cart.push({
+                    id: id,
+                    name: name,
+                    price: price,
+                    image: image,
+                    quantity: quantity
+                });
+            }
+
+            // Reset quantity display to 1 after adding to cart
+            menuItem.querySelector('.quantity-display').textContent = '1';
+            
+            updateCart();
+            showNotification('Item added to cart!');
+        }
+
+        // Update Cart Display
+        function updateCart() {
+            cartCount.textContent = cart.reduce((total, item) => total + item.quantity, 0);
+            
+            cartItems.innerHTML = cart.map(item => `
+                <div class="cart-item">
+                    <div class="cart-item-image">
+                        <img src="${item.image}" alt="${item.name}">
+                    </div>
+                    <div class="cart-item-details">
+                        <div class="cart-item-name">${item.name}</div>
+                        <div class="cart-item-price">₹${item.price}</div>
+                        <div class="cart-quantity">
+                            <button onclick="updateQuantity(${item.id}, -1)">-</button>
+                            <span>${item.quantity}</span>
+                            <button onclick="updateQuantity(${item.id}, 1)">+</button>
+                            <button onclick="removeFromCart(${item.id})">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+
+            totalAmount.textContent = '₹' + cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+        }
+
+        // Update Quantity in Cart
+        function updateQuantity(id, change) {
+            const item = cart.find(item => item.id === id);
+            if (item) {
+                item.quantity += change;
+                if (item.quantity <= 0) {
+                    removeFromCart(id);
+                } else {
+                    updateCart();
+                }
+            }
+        }
+
+        // Remove from Cart
+        function removeFromCart(id) {
+            cart = cart.filter(item => item.id !== id);
+            updateCart();
+        }
+
+        // Checkout Function
+        function checkout() {
+            if (cart.length === 0) {
+                showNotification('Your cart is empty!');
+                return;
+            }
+            showNotification('Order placed successfully!');
+            cart = [];
+            updateCart();
+            cartModal.classList.remove('active');
+            overlay.classList.remove('active');
+        }
+
+        // Notification Function
+        function showNotification(message) {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.classList.add('show');
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+
+        // Cart Modal Toggle
         cartIcon.addEventListener('click', () => {
             cartModal.classList.add('active');
             overlay.classList.add('active');
@@ -751,85 +772,9 @@
 
         overlay.addEventListener('click', () => {
             cartModal.classList.remove('active');
-            navMenu.classList.remove('active');
             overlay.classList.remove('active');
-        });
-
-        // Add to Cart functionality
-        document.querySelectorAll('.add-to-cart').forEach(button => {
-            button.addEventListener('click', () => {
-                const menuItem = button.closest('.menu-item');
-                const id = menuItem.dataset.id;
-                const name = menuItem.querySelector('h3').textContent;
-                const price = parseInt(menuItem.querySelector('.menu-price').textContent.replace('₹', ''));
-                const image = menuItem.querySelector('img').src;
-                
-                addToCart(id, name, price, image);
-            });
-        });
-
-        function addToCart(id, name, price, image) {
-            const existingItem = cart.find(item => item.id === id);
-
-            if (existingItem) {
-                existingItem.quantity++;
-            } else {
-                cart.push({
-                    id: id,
-                    name: name,
-                    price: price,
-                    image: image,
-                    quantity: 1
-                });
-            }
-
-            updateCart();
-        }
-
-        function updateCart() {
-            cartCount.textContent = cart.reduce((total, item) => total + item.quantity, 0);
-            
-            cartItems.innerHTML = cart.map(item => `
-                <div class="cart-item">
-                    <img src="${item.image}" alt="${item.name}">
-                    <div class="cart-item-details">
-                        <h3 class="cart-item-title">${item.name}</h3>
-                        <span class="cart-item-price">₹${item.price}</span>
-                        <div class="cart-item-quantity">
-                            <button class="quantity-btn" onclick="updateQuantity('${item.id}', -1)">-</button>
-                            <span>${item.quantity}</span>
-                            <button class="quantity-btn" onclick="updateQuantity('${item.id}', 1)">+</button>
-                        </div>
-                    </div>
-                </div>
-            `).join('');
-
-            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-            totalAmount.textContent = `₹${total}`;
-        }
-
-        function updateQuantity(id, change) {
-            const item = cart.find(item => item.id === id);
-            if (item) {
-                item.quantity += change;
-                if (item.quantity <= 0) {
-                    cart = cart.filter(item => item.id !== id);
-                }
-                updateCart();
-            }
-        }
-
-        // Checkout functionality
-        document.querySelector('.checkout-btn').addEventListener('click', () => {
-            if (cart.length > 0) {
-                alert('Thank you for your order! Total amount: ' + totalAmount.textContent);
-                cart = [];
-                updateCart();
-                cartModal.classList.remove('active');
-                overlay.classList.remove('active');
-            }
+            navMenu.classList.remove('active');
         });
     </script>
 </body>
 </html>
-    
