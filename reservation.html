@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gcafe - Reservation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            background-color: #f9f9f9;
+            padding-top: 80px;
+        }
+
+        header {
+            background: #1a1a1a;
+            padding: 1.2rem 5%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: #fff;
+            font-size: 2rem;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .menu-toggle {
+            display: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #e67e22;
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+        .overlay.active {
+            display: block;
+        }
+
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
+                        url('https://images.unsplash.com/photo-1554118811-1e0d58224f24') no-repeat center center;
+            background-size: cover;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            margin-bottom: 3rem;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        /* Reservation Container Styles */
+        .reservation-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            margin-bottom: 3rem;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #333;
+            font-weight: 500;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #e67e22;
+        }
+
+        textarea {
+            height: 100px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            background: #e67e22;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background 0.3s;
+            width: 100%;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .submit-btn:hover {
+            background: #d35400;
+        }
+
+        .location-select {
+            margin-bottom: 2rem;
+        }
+
+        .location-select h2 {
+            margin-bottom: 1.5rem;
+            color: #333;
+        }
+
+        .location-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .location-option {
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            padding: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .location-option:hover {
+            border-color: #e67e22;
+            transform: translateY(-2px);
+        }
+
+        .location-option.selected {
+            border-color: #e67e22;
+            background: #fff3e0;
+        }
+
+        .location-option i {
+            font-size: 1.5rem;
+            color: #e67e22;
+            margin-bottom: 0.5rem;
+        }
+
+        .location-name {
+            font-weight: 500;
+            margin-bottom: 0.3rem;
+        }
+
+        .location-address {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .success-message, .error-message {
+            display: none;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .success-message {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        .error-message {
+            background: #ffebee;
+            color: #c62828;
+        }
+
+        /* Mobile Responsive Styles */
+        @media screen and (max-width: 768px) {
+            body {
+                padding-top: 60px;
+            }
+
+            header {
+                padding: 1rem;
+            }
+
+            .logo {
+                font-size: 1.5rem;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            nav ul {
+                position: fixed;
+                top: 0;
+                left: -100%;
+                height: 100vh;
+                width: 80%;
+                background: #1a1a1a;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                transition: 0.3s ease-in-out;
+                z-index: 1000;
+            }
+
+            nav ul.active {
+                left: 0;
+            }
+
+            nav ul li {
+                margin: 1.5rem 0;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .reservation-container {
+                margin: 1rem;
+                padding: 1rem;
+            }
+
+            .hero {
+                height: 250px;
+            }
+
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .location-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .hero h1 {
+                font-size: 1.5rem;
+            }
+
+            .submit-btn {
+                padding: 0.8rem;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="newcode.html" class="logo">Gcafe</a>
+        <div class="menu-toggle" id="menuToggle">
+            <i class="fas fa-bars"></i>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="newcode.html">Home</a></li>
+                <li><a href="menu.html">Menu</a></li>
+                <li><a href="stores.html">Our Stores</a></li>
+                <li><a href="reservation.html">Reservation</a></li>
+                <li><a href="contact.html">Contact us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Make a Reservation</h1>
+            <p>Book your table at Gcafe and enjoy the perfect coffee experience</p>
+        </div>
+    </section>
+
+    <div class="reservation-container">
+        <div class="success-message" id="successMessage">
+            <i class="fas fa-check-circle"></i>
+            Your reservation has been successfully booked!
+        </div>
+        <div class="error-message" id="errorMessage">
+            <i class="fas fa-exclamation-circle"></i>
+            Please fill in all required fields and select a location.
+        </div>
+
+        <div class="location-select">
+            <h2>Select Location</h2>
+            <div class="location-grid">
+                <div class="location-option" data-location="indiranagar">
+                    <i class="fas fa-store"></i>
+                    <div class="location-name">Indiranagar</div>
+                    <div class="location-address">100 Feet Road, Near Metro Station, Indiranagar, Bangalore - 560038</div>
+                </div>
+                <div class="location-option" data-location="koramangala">
+                    <i class="fas fa-store"></i>
+                    <div class="location-name">Koramangala</div>
+                    <div class="location-address">80 Feet Road, 4th Block, Koramangala, Bangalore - 560034</div>
+                </div>
+                <div class="location-option" data-location="whitefield">
+                    <i class="fas fa-store"></i>
+                    <div class="location-name">Whitefield</div>
+                    <div class="location-address">Phoenix Marketcity Mall, Whitefield Main Road, Bangalore - 560048</div>
+                </div>
+                <div class="location-option" data-location="mg-road">
+                    <i class="fas fa-store"></i>
+                    <div class="location-name">MG Road</div>
+                    <div class="location-address">1 MG Road Mall, MG Road, Bangalore - 560001</div>
+                </div>
+            </div>
+        </div>
+
+        <form id="reservationForm">
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="name">Full Name *</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address *</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number *</label>
+                    <input type="tel" id="phone" name="phone" required pattern="[0-9]{10}" placeholder="10 digit number">
+                </div>
+                <div class="form-group">
+                    <label for="guests">Number of Guests *</label>
+                    <select id="guests" name="guests" required>
+                        <option value="">Select number of guests</option>
+                        <option value="1">1 Person</option>
+                        <option value="2">2 People</option>
+                        <option value="3">3 People</option>
+                        <option value="4">4 People</option>
+                        <option value="5">5 People</option>
+                        <option value="6">6 People</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="date">Date *</label>
+                    <input type="date" id="date" name="date" required>
+                </div>
+                <div class="form-group">
+                    <label for="time">Time *</label>
+                    <select id="time" name="time" required>
+                        <option value="">Select time</option>
+                        <option value="10:00">10:00 AM</option>
+                        <option value="11:00">11:00 AM</option>
+                        <option value="12:00">12:00 PM</option>
+                        <option value="13:00">1:00 PM</option>
+                        <option value="14:00">2:00 PM</option>
+                        <option value="15:00">3:00 PM</option>
+                        <option value="16:00">4:00 PM</option>
+                        <option value="17:00">5:00 PM</option>
+                        <option value="18:00">6:00 PM</option>
+                        <option value="19:00">7:00 PM</option>
+                        <option value="20:00">8:00 PM</option>
+                        <option value="21:00">9:00 PM</option>
+                    </select>
+                </div>
+                <div class="form-group full-width">
+                    <label for="special-requests">Special Requests (Optional)</label>
+                    <textarea id="special-requests" name="special-requests"></textarea>
+                </div>
+            </div>
+            <button type="submit" class="submit-btn">
+                <i class="fas fa-calendar-check"></i>
+                Confirm Reservation
+            </button>
+        </form>
+    </div>
+
+    <script>
+        // Mobile Menu Toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const navMenu = document.querySelector('nav ul');
+
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            document.body.classList.toggle('menu-open');
+        });
+
+        // Location Selection
+        const locationOptions = document.querySelectorAll('.location-option');
+        let selectedLocation = null;
+
+        locationOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                locationOptions.forEach(opt => opt.classList.remove('selected'));
+                option.classList.add('selected');
+                selectedLocation = option.dataset.location;
+            });
+        });
+
+        // Form Validation and Submission
+        const form = document.getElementById('reservationForm');
+        const successMessage = document.getElementById('successMessage');
+        const errorMessage = document.getElementById('errorMessage');
+
+        // Set minimum date to tomorrow
+        const dateInput = document.getElementById('date');
+        const today = new Date();
+        const tomorrow = new Date(today);
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        dateInput.min = tomorrow.toISOString().split('T')[0];
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            if (!selectedLocation) {
+                errorMessage.style.display = 'block';
+                successMessage.style.display = 'none';
+                return;
+            }
+
+            if (form.checkValidity()) {
+                successMessage.style.display = 'block';
+                errorMessage.style.display = 'none';
+                form.reset();
+                locationOptions.forEach(opt => opt.classList.remove('selected'));
+                selectedLocation = null;
+
+                setTimeout(() => {
+                    successMessage.style.display = 'none';
+                }, 3000);
+            } else {
+                errorMessage.style.display = 'block';
+                successMessage.style.display = 'none';
+            }
+        });
+
+        // Phone number validation
+        const phoneInput = document.getElementById('phone');
+        phoneInput.addEventListener('input', (e) => {
+            e.target.value = e.target.value.replace(/[^0-9]/g, '').slice(0, 10);
+        });
+
+        // Check for location parameter in URL
+        window.addEventListener('load', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const locationParam = urlParams.get('location');
+            if (locationParam) {
+                const locationOption = document.querySelector(`[data-location="${locationParam}"]`);
+                if (locationOption) {
+                    locationOption.click();
+                }
+            }
+        });
+    </script>
+</body>
+</html>

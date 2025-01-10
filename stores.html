@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gcafe - Our Stores</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            background-color: #f9f9f9;
+            padding-top: 80px;
+        }
+
+        /* Header Styles */
+        header {
+            background: #1a1a1a;
+            padding: 1.2rem 5%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: #fff;
+            font-size: 2rem;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .menu-toggle {
+            display: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #e67e22;
+        }
+
+        /* Search Bar Styles */
+        .search-container {
+            padding: 2rem 5%;
+            background: #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+
+        .search-box {
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            padding-left: 3rem;
+            border: 2px solid #eee;
+            border-radius: 30px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .search-input:focus {
+            border-color: #e67e22;
+            outline: none;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #666;
+        }
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
+                        url('https://images.unsplash.com/photo-1554118811-1e0d58224f24') no-repeat center center;
+            background-size: cover;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            margin-bottom: 3rem;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Store Grid Styles */
+        .store-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .store-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .store-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 0.5s forwards;
+        }
+
+        .store-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .store-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .store-content {
+            padding: 1.5rem;
+        }
+
+        .store-title {
+            font-size: 1.3rem;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .store-address {
+            color: #666;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+
+        .store-details {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .store-detail {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .store-detail i {
+            color: #e67e22;
+            width: 20px;
+        }
+
+        .store-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin-bottom: 1rem;
+        }
+
+        .status-open {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        .status-open i {
+            font-size: 0.7rem;
+        }
+
+        .store-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 0.8rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+            text-align: center;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: #e67e22;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #d35400;
+        }
+
+        .btn-secondary {
+            background: #f0f0f0;
+            color: #333;
+        }
+
+        .btn-secondary:hover {
+            background: #e0e0e0;
+        }
+
+        /* Mobile Responsive Styles */
+        @media screen and (max-width: 768px) {
+            body {
+                padding-top: 60px;
+            }
+
+            header {
+                padding: 1rem;
+            }
+
+            .logo {
+                font-size: 1.5rem;
+            }
+
+            .menu-toggle {
+                display: block;
+                position: relative;
+                z-index: 1001;
+            }
+
+            nav ul {
+                position: fixed;
+                top: 0;
+                left: -100%;
+                height: 100vh;
+                width: 80%;
+                background: #1a1a1a;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                transition: 0.3s ease-in-out;
+                z-index: 1000;
+            }
+
+            nav ul.active {
+                left: 0;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+                padding: 0 1rem;
+            }
+
+            .store-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+                padding: 0 1rem;
+            }
+
+            .search-container {
+                padding: 1rem;
+            }
+
+            .store-card {
+                margin-bottom: 1rem;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="newcode.html" class="logo">Gcafe</a>
+        <div class="menu-toggle" id="menuToggle">
+            <i class="fas fa-bars"></i>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="newcode.html">Home</a></li>
+                <li><a href="menu.html">Menu</a></li>
+                <li><a href="stores.html">Our Stores</a></li>
+                <li><a href="reservation.html">Reservation</a></li>
+                <li><a href="contact.html">Contact us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Our Store Locations</h1>
+            <p>Find your nearest Gcafe and experience the perfect cup of coffee</p>
+        </div>
+    </section>
+
+    <div class="search-container">
+        <div class="search-box">
+            <i class="fas fa-search search-icon"></i>
+            <input type="text" class="search-input" placeholder="Search for a location..." id="searchInput">
+        </div>
+    </div>
+
+    <div class="store-container">
+        <div class="store-grid">
+            <!-- Store 1 -->
+            <div class="store-card">
+                <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24" alt="Gcafe Indiranagar" class="store-image">
+                <div class="store-content">
+                    <div class="store-status status-open">
+                        <i class="fas fa-circle"></i>
+                        Open Now
+                    </div>
+                    <h2 class="store-title">Gcafe Indiranagar</h2>
+                    <p class="store-address">100 Feet Road, Near Metro Station, Indiranagar, Bangalore - 560038</p>
+                    <div class="store-details">
+                        <div class="store-detail">
+                            <i class="far fa-clock"></i>
+                            <span>8:00 AM - 11:00 PM</span>
+                        </div>
+                        <div class="store-detail">
+                            <i class="fas fa-phone"></i>
+                            <span>+91 98765 43210</span>
+                        </div>
+                        <div class="store-detail">
+                            <i class="fas fa-wifi"></i>
+                            <span>Free WiFi</span>
+                        </div>
+                    </div>
+                    <div class="store-actions">
+                        <a href="#" class="btn btn-primary">
+                            <i class="fas fa-map-marker-alt"></i>
+                            Get Directions
+                        </a>
+                        <a href="reservation.html" class="btn btn-secondary">
+                            <i class="far fa-calendar-alt"></i>
+                            Reserve
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Store 2 -->
+            <div class="store-card">
+                <img src="https://images.unsplash.com/photo-1559925393-8be0ec4767c8" alt="Gcafe Koramangala" class="store-image">
+                <div class="store-content">
+                    <div class="store-status status-open">
+                        <i class="fas fa-circle"></i>
+                        Open Now
+                    </div>
+                    <h2 class="store-title">Gcafe Koramangala</h2>
+                    <p class="store-address">80 Feet Road, 4th Block, Koramangala, Bangalore - 560034</p>
+                    <div class="store-details">
+                        <div class="store-detail">
+                            <i class="far fa-clock"></i>
+                            <span>8:00 AM - 11:00 PM</span>
+                        </div>
+                        <div class="store-detail">
+                            <i class="fas fa-phone"></i>
+                            <span>+91 98765 43211</span>
+                        </div>
+                        <div class="store-detail">
+                            <i class="fas fa-wifi"></i>
+                            <span>Free WiFi</span>
+                        </div>
+                    </div>
+                    <div class="store-actions">
+                        <a href="#" class="btn btn-primary">
+                            <i class="fas fa-map-marker-alt"></i>
+                            Get Directions
+                        </a>
+                        <a href="reservation.html" class="btn btn-secondary">
+                            <i class="far fa-calendar-alt"></i>
+                            Reserve
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Store 3 -->
+            <div class="store-card">
+                <img src="https://images.unsplash.com/photo-1453614512568-c4024d13c247" alt="Gcafe Whitefield" class="store-image">
+                <div class="store-content">
+                    <div class="store-status status-open">
+                        <i class="fas fa-circle"></i>
+                        Open Now
+                    </div>
+                    <h2 class="store-title">Gcafe Whitefield</h2>
+                    <p class="store-address">Phoenix Marketcity Mall, Whitefield Main Road, Bangalore - 560048</p>
+                    <div class="store-details">
+                        <div class="store-detail">
+                            <i class="far fa-clock"></i>
+                            <span>8:00 AM - 11:00 PM</span>
+                        </div>
+                        <div class="store-detail">
+                            <i class="fas fa-phone"></i>
+                            <span>+91 98765 43212</span>
+                        </div>
+                        <div class="store-detail">
+                            <i class="fas fa-wifi"></i>
+                            <span>Free WiFi</span>
+                        </div>
+                    </div>
+                    <div class="store-actions">
+                        <a href="#" class="btn btn-primary">
+                            <i class="fas fa-map-marker-alt"></i>
+                            Get Directions
+                        </a>
+                        <a href="reservation.html" class="btn btn-secondary">
+                            <i class="far fa-calendar-alt"></i>
+                            Reserve
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Store 4 -->
+            <div class="store-card">
+                <img src="https://images.unsplash.com/photo-1521017432531-fbd92d768814" alt="Gcafe MG Road" class="store-image">
+                <div class="store-content">
+                    <div class="store-status status-open">
+                        <i class="fas fa-circle"></i>
+                        Open Now
+                    </div>
+                    <h2 class="store-title">Gcafe MG Road</h2>
+                    <p class="store-address">1 MG Road Mall, MG Road, Bangalore - 560001</p>
+                    <div class="store-details">
+                        <div class="store-detail">
+                            <i class="far fa-clock"></i>
+                            <span>8:00 AM - 11:00 PM</span>
+                        </div>
+                        <div class="store-detail">
+                            <i class="fas fa-phone"></i>
+                            <span>+91 98765 43213</span>
+                        </div>
+                        <div class="store-detail">
+                            <i class="fas fa-wifi"></i>
+                            <span>Free WiFi</span>
+                        </div>
+                    </div>
+                    <div class="store-actions">
+                        <a href="#" class="btn btn-primary">
+                            <i class="fas fa-map-marker-alt"></i>
+                            Get Directions
+                        </a>
+                        <a href="reservation.html" class="btn btn-secondary">
+                            <i class="far fa-calendar-alt"></i>
+                            Reserve
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mobile Menu Toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const navMenu = document.querySelector('nav ul');
+
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            menuToggle.classList.toggle('active');
+        });
+
+        // Search Functionality
+        const searchInput = document.getElementById('searchInput');
+        const storeCards = document.querySelectorAll('.store-card');
+
+        searchInput.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            
+            storeCards.forEach(card => {
+                const title = card.querySelector('.store-title').textContent.toLowerCase();
+                const address = card.querySelector('.store-address').textContent.toLowerCase();
+                
+                if (title.includes(searchTerm) || address.includes(searchTerm)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!navMenu.contains(e.target) && !menuToggle.contains(e.target)) {
+                navMenu.classList.remove('active');
+                menuToggle.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>
