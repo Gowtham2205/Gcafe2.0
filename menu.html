@@ -46,6 +46,10 @@
             color: white;
             font-size: 1.5rem;
             cursor: pointer;
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
         }
 
         nav ul {
@@ -65,52 +69,76 @@
         nav a:hover {
             color: #e67e22;
         }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
+                        url('https://images.unsplash.com/photo-1554118811-1e0d58224f24') no-repeat center center;
+            background-size: cover;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            margin-bottom: 3rem;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Menu Container */
+        .menu-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
         /* Menu Categories */
         .menu-categories {
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             gap: 2rem;
-            padding: 2rem 0;
-            flex-wrap: wrap;
+            margin-bottom: 3rem;
+            align-items: center;
         }
 
         .category-btn {
-            padding: 0.8rem 2rem;
-            border: none;
-            background: white;
-            border-radius: 30px;
-            cursor: pointer;
-            font-weight: 500;
-            transition: all 0.3s;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-
-        .category-btn.active {
             background: #e67e22;
             color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 500;
+            transition: all 0.3s;
+            width: 200px;
+            text-align: center;
         }
 
         .category-btn:hover {
+            background: #d35400;
             transform: translateY(-2px);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
 
-        /* Menu Grid Styles */
-        .menu-section {
-            display: none;
-            padding: 2rem 5%;
+        .category-btn.active {
+            background: #d35400;
         }
-
-        .menu-section.active {
-            display: block;
-        }
-
+                /* Menu Grid */
         .menu-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            padding: 2rem 0;
         }
 
         .menu-item {
@@ -121,11 +149,7 @@
             transition: transform 0.3s;
             opacity: 0;
             transform: translateY(20px);
-        }
-
-        .menu-item.show {
-            opacity: 1;
-            transform: translateY(0);
+            animation: fadeIn 0.5s forwards;
         }
 
         .menu-item:hover {
@@ -142,47 +166,64 @@
             padding: 1.5rem;
         }
 
-        .menu-item h3 {
-            font-size: 1.3rem;
-            margin-bottom: 0.5rem;
-            color: #333;
-        }
-
-        .menu-price {
-            color: #e67e22;
-            font-weight: 600;
-            font-size: 1.2rem;
+        .menu-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             margin-bottom: 1rem;
         }
 
-        .menu-description {
+        .menu-item-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .menu-item-price {
+            color: #e67e22;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .menu-item-description {
             color: #666;
             font-size: 0.9rem;
             margin-bottom: 1rem;
         }
 
-        .add-to-cart {
-            background: #e67e22;
-            color: white;
-            border: none;
-            padding: 0.8rem 1.5rem;
-            border-radius: 25px;
-            cursor: pointer;
-            transition: all 0.3s;
+        .menu-item-rating {
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            font-weight: 500;
-            width: 100%;
-            justify-content: center;
         }
 
-        .add-to-cart:hover {
-            background: #d35400;
-            transform: translateY(-2px);
+        .stars {
+            color: #ffd700;
         }
 
-        /* Mobile Responsive Styles */
+        .rating-count {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Animation */
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Category Content */
+        .category-content {
+            display: none;
+        }
+
+        .category-content.active {
+            display: block;
+        }
+
+        /* Responsive Design */
         @media screen and (max-width: 768px) {
             body {
                 padding-top: 60px;
@@ -211,291 +252,85 @@
                 align-items: center;
                 justify-content: center;
                 transition: 0.3s ease-in-out;
-                gap: 2rem;
+                z-index: 1000;
             }
 
             nav ul.active {
                 left: 0;
             }
 
+            nav ul li {
+                margin: 1.5rem 0;
+            }
+
+            .hero {
+                height: 250px;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+                padding: 0 1rem;
+            }
+
             .menu-categories {
-                padding: 1rem;
-                gap: 1rem;
+                gap: 1.5rem;
+                margin-bottom: 2rem;
             }
 
             .category-btn {
-                padding: 0.6rem 1.5rem;
-                font-size: 0.9rem;
+                width: 180px;
+                padding: 0.8rem 1.5rem;
+                font-size: 1rem;
             }
 
             .menu-grid {
                 grid-template-columns: 1fr;
-                gap: 1rem;
+                gap: 2rem;
+                padding: 1rem 0;
+            }
+
+            .menu-item-content {
+                padding: 1.2rem;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .menu-container {
                 padding: 0 1rem;
             }
 
-            .menu-item img {
-                height: 180px;
+            .category-btn {
+                width: 160px;
+                padding: 0.7rem 1.2rem;
             }
         }
 
-        /* Tablet Responsive */
-        @media screen and (min-width: 769px) and (max-width: 1024px) {
-            .menu-grid {
-                grid-template-columns: repeat(2, 1fr);
-                padding: 0 2rem;
-            }
-
-            .menu-categories {
-                padding: 1.5rem;
-                gap: 1.5rem;
-            }
-        }
-        /* Cart Modal Styles */
-        .cart-modal {
-            position: fixed;
-            top: 0;
-            right: -400px;
-            width: 400px;
-            height: 100vh;
-            background: white;
-            padding: 2rem;
-            transition: right 0.3s ease;
-            z-index: 999;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .cart-modal.active {
-            right: 0;
-        }
-
-        .cart-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 2rem;
-        }
-
-        .cart-title {
-            font-size: 1.5rem;
-            font-weight: 600;
-        }
-
-        .close-cart {
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: #666;
-            transition: color 0.3s;
-        }
-
-        .close-cart:hover {
-            color: #e67e22;
-        }
-
-        .cart-items {
-            flex: 1;
-            overflow-y: auto;
-            margin-bottom: 2rem;
-        }
-
-        .cart-item {
-            display: flex;
-            gap: 1rem;
-            padding: 1rem 0;
-            border-bottom: 1px solid #eee;
-        }
-
-        .cart-item img {
-            width: 80px;
-            height: 80px;
-            object-fit: cover;
-            border-radius: 8px;
-        }
-
-        .cart-item-details {
-            flex: 1;
-        }
-
-        .cart-item-title {
-            font-size: 1.1rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .cart-item-price {
-            color: #e67e22;
-            font-weight: 500;
-        }
-
-        .cart-item-quantity {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin-top: 0.5rem;
-        }
-
-        .quantity-btn {
-            background: #f0f0f0;
-            border: none;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .quantity-btn:hover {
-            background: #e0e0e0;
-        }
-
-        .cart-total {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 1.2rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            padding-top: 1rem;
-            border-top: 2px solid #eee;
-        }
-
-        .checkout-btn {
-            background: #e67e22;
-            color: white;
-            border: none;
-            padding: 1rem;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 500;
-            transition: all 0.3s;
-            width: 100%;
-        }
-
-        .checkout-btn:hover {
-            background: #d35400;
-        }
-
+        /* Overlay */
         .overlay {
+            display: none;
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.5);
-            display: none;
-            z-index: 998;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
         }
 
         .overlay.active {
             display: block;
         }
-
-        .cart-icon {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            background: #e67e22;
-            color: white;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s;
-            z-index: 997;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
-        }
-
-        .cart-icon:hover {
-            transform: scale(1.1);
-            background: #d35400;
-        }
-
-        .cart-count {
-            position: absolute;
-            top: -5px;
-            right: -5px;
-            background: #e74c3c;
-            color: white;
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
-
-        /* Cart Notification */
-        .cart-notification {
-            position: fixed;
-            top: 20px;
-            right: -400px;
-            background: #4CAF50;
-            color: white;
-            padding: 1rem 1.5rem;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
-            transition: right 0.3s ease;
-            z-index: 1002;
-        }
-
-        .cart-notification.show {
-            right: 20px;
-        }
-
-        /* Empty Cart Message */
-        .empty-cart-message {
-            display: none;
-            padding: 2rem;
-            text-align: center;
-        }
-
-        .empty-cart-content {
-            animation: bounce 1s ease infinite;
-        }
-
-        .empty-cart-message i {
-            font-size: 4rem;
-            color: #ddd;
-            margin-bottom: 1rem;
-        }
-
-        .empty-cart-message h3 {
-            color: #666;
-            margin-bottom: 0.5rem;
-        }
-
-        .empty-cart-message p {
-            color: #999;
-        }
-
-        /* Animations */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-    </style>
+            </style>
 </head>
 <body>
-    <!-- Header -->
     <header>
         <a href="newcode.html" class="logo">Gcafe</a>
         <div class="menu-toggle" id="menuToggle">
@@ -512,477 +347,151 @@
         </nav>
     </header>
 
-    <!-- Menu Categories -->
-    <div class="menu-categories">
-        <button class="category-btn active" data-category="hot-coffee">Hot Coffee</button>
-        <button class="category-btn" data-category="cold-coffee">Cold Coffee</button>
-        <button class="category-btn" data-category="pastries">Pastries</button>
-    </div>
-
-    <div class="overlay"></div>
-    <!-- Menu Sections -->
-    <section id="hot-coffee" class="menu-section active">
-        <div class="menu-grid">
-            <div class="menu-item" data-id="h1">
-                <div class="menu-image">
-                    <img src="https://images.unsplash.com/photo-1541167760496-1628856ab772" alt="Espresso">
-                </div>
-                <div class="menu-content">
-                    <h3>Classic Espresso</h3>
-                    <p>Rich and intense single shot of pure coffee</p>
-                    <div class="menu-footer">
-                        <span class="menu-price">₹120</span>
-                        <button class="add-to-cart">Add to Cart</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="menu-item" data-id="h2">
-                <div class="menu-image">
-                    <img src="https://images.unsplash.com/photo-1572442388796-11668a67e53d" alt="Cappuccino">
-                </div>
-                <div class="menu-content">
-                    <h3>Cappuccino</h3>
-                    <p>Espresso with steamed milk foam</p>
-                    <div class="menu-footer">
-                        <span class="menu-price">₹150</span>
-                        <button class="add-to-cart">Add to Cart</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="menu-item" data-id="h3">
-                <div class="menu-image">
-                    <img src="https://images.unsplash.com/photo-1610889556528-9a770e32642f" alt="Latte">
-                </div>
-                <div class="menu-content">
-                    <h3>Caramel Latte</h3>
-                    <p>Espresso with caramel and steamed milk</p>
-                    <div class="menu-footer">
-                        <span class="menu-price">₹180</span>
-                        <button class="add-to-cart">Add to Cart</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="menu-item" data-id="h4">
-                <div class="menu-image">
-                    <img src="https://images.unsplash.com/photo-1585494156145-1c60a4fe952b" alt="Mocha">
-                </div>
-                <div class="menu-content">
-                    <h3>Hot Mocha</h3>
-                    <p>Espresso with chocolate and steamed milk</p>
-                    <div class="menu-footer">
-                        <span class="menu-price">₹190</span>
-                        <button class="add-to-cart">Add to Cart</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-       <!-- Cold Coffee Section -->
-    <section id="cold-coffee" class="menu-section">
-        <div class="menu-grid">
-            <div class="menu-item" data-id="c1">
-                <div class="menu-image">
-                    <img src="https://images.unsplash.com/photo-1517701604599-bb29b565090c" alt="Iced Americano">
-                </div>
-                <div class="menu-content">
-                    <h3>Iced Americano</h3>
-                    <p>Chilled espresso with cold water</p>
-                    <div class="menu-footer">
-                        <span class="menu-price">₹140</span>
-                        <button class="add-to-cart">Add to Cart</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="menu-item" data-id="c2">
-                <div class="menu-image">
-                    <img src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735" alt="Frappuccino">
-                </div>
-                <div class="menu-content">
-                    <h3>Chocolate Frappuccino</h3>
-                    <p>Blended coffee with chocolate and cream</p>
-                    <div class="menu-footer">
-                        <span class="menu-price">₹220</span>
-                        <button class="add-to-cart">Add to Cart</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="menu-item" data-id="c3">
-                <div class="menu-image">
-                    <img src="https://images.unsplash.com/photo-1499961024600-ad094db305cc" alt="Cold Brew">
-                </div>
-                <div class="menu-content">
-                    <h3>Cold Brew</h3>
-                    <p>Slow-steeped coffee served over ice</p>
-                    <div class="menu-footer">
-                        <span class="menu-price">₹160</span>
-                        <button class="add-to-cart">Add to Cart</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="menu-item" data-id="c4">
-                <div class="menu-image">
-                    <img src="https://images.unsplash.com/photo-1592663527359-cf6642f54cff" alt="Iced Latte">
-                </div>
-                <div class="menu-content">
-                    <h3>Iced Caramel Latte</h3>
-                    <p>Chilled espresso with caramel and milk</p>
-                    <div class="menu-footer">
-                        <span class="menu-price">₹200</span>
-                        <button class="add-to-cart">Add to Cart</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Pastries Section -->
-    <section id="pastries" class="menu-section">
-        <div class="menu-grid">
-            <div class="menu-item" data-id="p1">
-                <div class="menu-image">
-                    <img src="https://images.unsplash.com/photo-1530610476181-d83430b64dcd" alt="Chocolate Croissant">
-                </div>
-                <div class="menu-content">
-                    <h3>Chocolate Croissant</h3>
-                    <p>Flaky pastry filled with rich chocolate</p>
-                    <div class="menu-footer">
-                        <span class="menu-price">₹90</span>
-                        <button class="add-to-cart">Add to Cart</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="menu-item" data-id="p2">
-                <div class="menu-image">
-                    <img src="https://images.unsplash.com/photo-1587668178277-295251f900ce" alt="Apple Danish">
-                </div>
-                <div class="menu-content">
-                    <h3>Apple Danish</h3>
-                    <p>Sweet pastry with caramelized apples</p>
-                    <div class="menu-footer">
-                        <span class="menu-price">₹110</span>
-                        <button class="add-to-cart">Add to Cart</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="menu-item" data-id="p3">
-                <div class="menu-image">
-                    <img src="https://images.unsplash.com/photo-1605807646983-377bc5a76493" alt="Almond Croissant">
-                </div>
-                <div class="menu-content">
-                    <h3>Almond Croissant</h3>
-                    <p>Buttery croissant with almond filling</p>
-                    <div class="menu-footer">
-                        <span class="menu-price">₹150</span>
-                        <button class="add-to-cart">Add to Cart</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="menu-item" data-id="p4">
-                <div class="menu-image">
-                    <img src="https://images.unsplash.com/photo-1509365465985-25d11c17e812" alt="Cinnamon Roll">
-                </div>
-                <div class="menu-content">
-                    <h3>Cinnamon Roll</h3>
-                    <p>Classic pastry with cinnamon filling</p>
-                    <div class="menu-footer">
-                        <span class="menu-price">₹130</span>
-                        <button class="add-to-cart">Add to Cart</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section id="pastries" class="menu-section">
-        <div class="menu-grid">
-         <div class="menu-item" data-id="p1">
-    <img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a" alt="Chocolate Croissant">
-    <div class="menu-item-content">
-        <h3>Chocolate Croissant</h3>
-                    <div class="menu-price">₹120</div>
-                    <p class="menu-description">Buttery croissant with chocolate filling</p>
-                    <button class="add-to-cart">
-                        <i class="fas fa-shopping-cart"></i>
-                        Add to Cart
-                    </button>
-                </div>
-            </div>
-          <div class="menu-item" data-id="p2">
-    <img src="https://images.unsplash.com/photo-1587830076295-3241cffc0d85" alt="Blueberry Muffin">
-    <div class="menu-item-content">
-        <h3>Blueberry Muffin</h3>
-                    <div class="menu-price">₹100</div>
-                    <p class="menu-description">Fresh baked muffin with blueberries</p>
-                    <button class="add-to-cart">
-                        <i class="fas fa-shopping-cart"></i>
-                        Add to Cart
-                    </button>
-                </div>
-            </div>
-            <div class="menu-item" data-id="p3">
-    <img src="https://images.unsplash.com/photo-1586724237569-f3d0c1dee8c6" alt="Danish Pastry">
-    <div class="menu-item-content">
-        <h3>Danish Pastry</h3>
-                    <div class="menu-price">₹110</div>
-                    <p class="menu-description">Sweet pastry with fruit filling</p>
-                    <button class="add-to-cart">
-                        <i class="fas fa-shopping-cart"></i>
-                        Add to Cart
-                    </button>
-                </div>
-            </div>
-           <div class="menu-item" data-id="p4">
-    <img src="https://images.unsplash.com/photo-1509365390695-33aee754301f" alt="Cinnamon Roll">
-    <div class="menu-item-content">
-        <h3>Cinnamon Roll</h3>
-                    <div class="menu-price">₹130</div>
-                    <p class="menu-description">Sweet roll with cinnamon-sugar filling</p>
-                    <button class="add-to-cart">
-                        <i class="fas fa-shopping-cart"></i>
-                        Add to Cart
-                    </button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Cart Icon -->
-    <div class="cart-icon">
-        <i class="fas fa-shopping-cart"></i>
-        <span class="cart-count">0</span>
-    </div>
-
-    <!-- Cart Modal -->
-    <div class="cart-modal">
-        <div class="cart-header">
-            <h2 class="cart-title">Your Cart</h2>
-            <span class="close-cart">&times;</span>
-        </div>
-        <div class="cart-items">
-            <!-- Cart items will be added here dynamically -->
-        </div>
-        <div class="empty-cart-message" id="emptyCartMessage">
-            <div class="empty-cart-content">
-                <i class="fas fa-shopping-basket"></i>
-                <h3>Your Cart is Empty</h3>
-                <p>Add some delicious items to your cart!</p>
-            </div>
-        </div>
-        <div class="cart-total">
-            <span>Total:</span>
-            <span class="total-amount">₹0</span>
-        </div>
-        <button class="checkout-btn">Proceed to Checkout</button>
-    </div>
-
-    <!-- Overlay -->
     <div class="overlay"></div>
 
-    <!-- Cart Notification -->
-    <div class="cart-notification" id="cartNotification">
-        <i class="fas fa-check-circle"></i>
-        <div class="notification-content">
-            <p class="notification-text">Item added to cart</p>
-            <span class="notification-item"></span>
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Our Menu</h1>
+            <p>Discover our delicious selection of coffees and pastries</p>
+        </div>
+    </section>
+
+    <div class="menu-container">
+        <div class="menu-categories">
+            <button class="category-btn active" data-category="hot-coffee">Hot Coffee</button>
+            <button class="category-btn" data-category="cold-coffee">Cold Coffee</button>
+            <button class="category-btn" data-category="pastries">Pastries</button>
+        </div>
+
+        <div class="category-content active" id="hot-coffee">
+            <div class="menu-grid">
+                <!-- Hot Coffee Items -->
+                <div class="menu-item">
+                    <img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd" alt="Espresso">
+                    <div class="menu-item-content">
+                        <div class="menu-item-header">
+                            <h3 class="menu-item-title">Espresso</h3>
+                            <span class="menu-item-price">₹120</span>
+                        </div>
+                        <p class="menu-item-description">Rich and intense single shot of pure coffee</p>
+                        <div class="menu-item-rating">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <span class="rating-count">(128)</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Add more hot coffee items here -->
+            </div>
+        </div>
+
+        <div class="category-content" id="cold-coffee">
+            <div class="menu-grid">
+                <!-- Cold Coffee Items -->
+                <div class="menu-item">
+                    <img src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735" alt="Iced Latte">
+                    <div class="menu-item-content">
+                        <div class="menu-item-header">
+                            <h3 class="menu-item-title">Iced Latte</h3>
+                            <span class="menu-item-price">₹180</span>
+                        </div>
+                        <p class="menu-item-description">Smooth espresso with cold milk and ice</p>
+                        <div class="menu-item-rating">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <span class="rating-count">(156)</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Add more cold coffee items here -->
+            </div>
+        </div>
+
+        <div class="category-content" id="pastries">
+            <div class="menu-grid">
+                <!-- Pastries Items -->
+                <div class="menu-item">
+                    <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff" alt="Croissant">
+                    <div class="menu-item-content">
+                        <div class="menu-item-header">
+                            <h3 class="menu-item-title">Butter Croissant</h3>
+                            <span class="menu-item-price">₹90</span>
+                        </div>
+                        <p class="menu-item-description">Flaky, buttery French pastry</p>
+                        <div class="menu-item-rating">
+                            <div class="stars">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <span class="rating-count">(142)</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Add more pastry items here -->
+            </div>
         </div>
     </div>
+
     <script>
         // Mobile Menu Toggle
         const menuToggle = document.getElementById('menuToggle');
         const navMenu = document.querySelector('nav ul');
+        const overlay = document.querySelector('.overlay');
 
         menuToggle.addEventListener('click', () => {
             navMenu.classList.toggle('active');
-            menuToggle.classList.toggle('active');
+            overlay.classList.toggle('active');
         });
 
-        // Close menu when clicking outside
-        document.addEventListener('click', (e) => {
-            if (!navMenu.contains(e.target) && !menuToggle.contains(e.target)) {
-                navMenu.classList.remove('active');
-                menuToggle.classList.remove('active');
-            }
+        // Close menu when clicking overlay
+        overlay.addEventListener('click', () => {
+            navMenu.classList.remove('active');
+            overlay.classList.remove('active');
         });
 
-        // Category switching
+        // Menu Categories Toggle
         const categoryBtns = document.querySelectorAll('.category-btn');
-        const menuSections = document.querySelectorAll('.menu-section');
+        const categoryContents = document.querySelectorAll('.category-content');
 
         categoryBtns.forEach(btn => {
             btn.addEventListener('click', () => {
-                // Remove active class from all buttons and sections
-                categoryBtns.forEach(b => b.classList.remove('active'));
-                menuSections.forEach(s => {
-                    s.classList.remove('active');
-                    // Reset animations for items
-                    s.querySelectorAll('.menu-item').forEach(item => {
-                        item.classList.remove('show');
-                    });
-                });
-
-                // Add active class to clicked button and corresponding section
-                btn.classList.add('active');
                 const category = btn.dataset.category;
-                const activeSection = document.getElementById(category);
-                activeSection.classList.add('active');
-
-                // Trigger animations for items in the active section
-                const items = activeSection.querySelectorAll('.menu-item');
-                items.forEach((item, index) => {
-                    setTimeout(() => {
-                        item.classList.add('show');
-                    }, 100 * index);
-                });
-            });
-        });
-
-        // Cart functionality
-        let cart = [];
-        const cartIcon = document.querySelector('.cart-icon');
-        const cartModal = document.querySelector('.cart-modal');
-        const overlay = document.querySelector('.overlay');
-        const closeCart = document.querySelector('.close-cart');
-        const cartItems = document.querySelector('.cart-items');
-        const cartCount = document.querySelector('.cart-count');
-        const totalAmount = document.querySelector('.total-amount');
-        const emptyCartMessage = document.getElementById('emptyCartMessage');
-
-        // Open/Close cart
-        cartIcon.addEventListener('click', () => {
-            cartModal.classList.add('active');
-            overlay.classList.add('active');
-        });
-
-        closeCart.addEventListener('click', () => {
-            cartModal.classList.remove('active');
-            overlay.classList.remove('active');
-        });
-
-        overlay.addEventListener('click', () => {
-            cartModal.classList.remove('active');
-            overlay.classList.remove('active');
-        });
-
-        // Add to cart functionality
-        document.querySelectorAll('.add-to-cart').forEach(button => {
-            button.addEventListener('click', () => {
-                const menuItem = button.closest('.menu-item');
-                const id = menuItem.dataset.id;
-                const name = menuItem.querySelector('h3').textContent;
-                const price = parseInt(menuItem.querySelector('.menu-price').textContent.replace('₹', ''));
-                const image = menuItem.querySelector('img').src;
                 
-                addToCart(id, name, price, image);
+                // Update active button
+                categoryBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                // Show selected category content
+                categoryContents.forEach(content => {
+                    content.classList.remove('active');
+                    if (content.id === category) {
+                        content.classList.add('active');
+                    }
+                });
             });
         });
 
-        function addToCart(id, name, price, image) {
-            const existingItem = cart.find(item => item.id === id);
-
-            if (existingItem) {
-                existingItem.quantity++;
-            } else {
-                cart.push({
-                    id: id,
-                    name: name,
-                    price: price,
-                    image: image,
-                    quantity: 1
-                });
-            }
-
-            // Show notification
-            const notification = document.getElementById('cartNotification');
-            const notificationItem = notification.querySelector('.notification-item');
-            notificationItem.textContent = name;
-            notification.classList.add('show');
-
-            setTimeout(() => {
-                notification.classList.remove('show');
-            }, 3000);
-
-            updateCart();
-        }
-
-        function updateCart() {
-            cartCount.textContent = cart.reduce((total, item) => total + item.quantity, 0);
-
-            if (cart.length === 0) {
-                cartItems.innerHTML = '';
-                emptyCartMessage.style.display = 'block';
-                document.querySelector('.cart-total').style.display = 'none';
-                document.querySelector('.checkout-btn').style.display = 'none';
-            } else {
-                emptyCartMessage.style.display = 'none';
-                document.querySelector('.cart-total').style.display = 'flex';
-                document.querySelector('.checkout-btn').style.display = 'block';
-
-                cartItems.innerHTML = cart.map(item => `
-                    <div class="cart-item">
-                        <img src="${item.image}" alt="${item.name}">
-                        <div class="cart-item-details">
-                            <h3 class="cart-item-title">${item.name}</h3>
-                            <span class="cart-item-price">₹${item.price}</span>
-                            <div class="cart-item-quantity">
-                                <button class="quantity-btn" onclick="updateQuantity('${item.id}', -1)">-</button>
-                                <span>${item.quantity}</span>
-                                <button class="quantity-btn" onclick="updateQuantity('${item.id}', 1)">+</button>
-                            </div>
-                        </div>
-                    </div>
-                `).join('');
-            }
-
-            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-            totalAmount.textContent = `₹${total}`;
-        }
-
-        function updateQuantity(id, change) {
-            const item = cart.find(item => item.id === id);
-            if (item) {
-                item.quantity += change;
-                if (item.quantity <= 0) {
-                    cart = cart.filter(item => item.id !== id);
-                }
-                updateCart();
-            }
-        }
-
-        // Checkout functionality
-        document.querySelector('.checkout-btn').addEventListener('click', () => {
-            if (cart.length > 0) {
-                alert('Thank you for your order! Total amount: ' + totalAmount.textContent);
-                cart = [];
-                updateCart();
-                cartModal.classList.remove('active');
+        // Close mobile menu when clicking a link
+        const navLinks = document.querySelectorAll('nav a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                navMenu.classList.remove('active');
                 overlay.classList.remove('active');
-            }
+            });
         });
-
-        // Initialize menu items animation
-        window.addEventListener('load', () => {
-            const activeSection = document.querySelector('.menu-section.active');
-            if (activeSection) {
-                const items = activeSection.querySelectorAll('.menu-item');
-                items.forEach((item, index) => {
-                    setTimeout(() => {
-                        item.classList.add('show');
-                    }, 100 * index);
-                });
-            }
-        });
-
-        // Initialize cart
-        updateCart();
     </script>
 </body>
 </html>
