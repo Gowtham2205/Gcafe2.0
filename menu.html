@@ -70,66 +70,13 @@
             color: #e67e22;
         }
 
-        /* Notification Styles */
-        .notification {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: rgba(0, 0, 0, 0.8);
-            color: white;
-            padding: 1rem 2rem;
-            border-radius: 5px;
-            display: none;
-            z-index: 1002;
-            animation: fadeIn 0.3s;
-        }
-
-        .notification.show {
-            display: block;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translate(-50%, -60%);
-            }
-            to {
-                opacity: 1;
-                transform: translate(-50%, -50%);
-            }
-        }
-
-        /* Success Message Styles */
-        .success-message {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: #4CAF50;
-            color: white;
-            padding: 2rem;
-            border-radius: 10px;
-            text-align: center;
-            z-index: 1002;
-            display: none;
-        }
-
-        .success-message.show {
-            display: block;
-            animation: fadeIn 0.3s;
-        }
-
-        .success-message i {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
-                /* Menu Categories */
+        /* Menu Categories */
         .menu-categories {
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             gap: 2rem;
             margin: 2rem 0;
+            align-items: center;
         }
 
         .category-btn {
@@ -142,6 +89,8 @@
             font-size: 1.1rem;
             font-weight: 500;
             transition: all 0.3s;
+            width: 200px;
+            text-align: center;
         }
 
         .category-btn:hover {
@@ -221,6 +170,8 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-direction: column;
+            gap: 1rem;
         }
 
         .menu-price {
@@ -228,8 +179,7 @@
             font-weight: 600;
             font-size: 1.2rem;
         }
-
-        /* Cart Styles */
+                /* Cart Styles */
         .cart-icon {
             position: fixed;
             bottom: 2rem;
@@ -268,7 +218,7 @@
             font-size: 0.8rem;
             font-weight: 600;
         }
-                /* Cart Modal Styles */
+
         .cart-modal {
             position: fixed;
             top: 0;
@@ -415,6 +365,8 @@
             align-items: center;
             gap: 0.5rem;
             font-weight: 500;
+            width: 100%;
+            justify-content: center;
         }
 
         .add-to-cart:hover {
@@ -469,15 +421,6 @@
                 width: 100%;
                 max-width: none;
             }
-
-            .menu-categories {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .category-btn {
-                width: 200px;
-            }
         }
     </style>
     </head>
@@ -504,16 +447,240 @@
         <button class="category-btn" data-category="pastries">Pastries</button>
     </div>
 
-    <!-- Notification Elements -->
-    <div class="notification" id="notification">
-        Item added to cart!
-    </div>
+    <!-- Hot Coffee Section -->
+     <section id="hot-coffee" class="menu-section active">
+        <div class="menu-grid">
+            <div class="menu-item" data-id="h1">
+                <div class="menu-image">
+                    <img src="https://images.unsplash.com/photo-1541167760496-1628856ab772" alt="Espresso">
+                </div>
+                <div class="menu-content">
+                    <h3>Classic Espresso</h3>
+                    <p>Rich and intense single shot of pure coffee</p>
+                    <div class="menu-footer">
+                        <span class="menu-price">₹120</span>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
 
-    <div class="success-message" id="successMessage">
-        <i class="fas fa-check-circle"></i>
-        <h3>Order Placed Successfully!</h3>
-        <p>Thank you for your order.</p>
-    </div>
+            <div class="menu-item" data-id="h2">
+                <div class="menu-image">
+                    <img src="https://images.unsplash.com/photo-1572442388796-11668a67e53d" alt="Cappuccino">
+                </div>
+                <div class="menu-content">
+                    <h3>Cappuccino</h3>
+                    <p>Espresso with steamed milk foam</p>
+                    <div class="menu-footer">
+                        <span class="menu-price">₹150</span>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-item" data-id="h3">
+                <div class="menu-image">
+                    <img src="https://images.unsplash.com/photo-1610889556528-9a770e32642f" alt="Latte">
+                </div>
+                <div class="menu-content">
+                    <h3>Caramel Latte</h3>
+                    <p>Espresso with caramel and steamed milk</p>
+                    <div class="menu-footer">
+                        <span class="menu-price">₹180</span>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-item" data-id="h4">
+                <div class="menu-image">
+                    <img src="https://images.unsplash.com/photo-1585494156145-1c60a4fe952b" alt="Mocha">
+                </div>
+                <div class="menu-content">
+                    <h3>Hot Mocha</h3>
+                    <p>Espresso with chocolate and steamed milk</p>
+                    <div class="menu-footer">
+                        <span class="menu-price">₹190</span>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+       <!-- Cold Coffee Section -->
+    <section id="cold-coffee" class="menu-section">
+        <div class="menu-grid">
+            <div class="menu-item" data-id="c1">
+                <div class="menu-image">
+                    <img src="https://images.unsplash.com/photo-1517701604599-bb29b565090c" alt="Iced Americano">
+                </div>
+                <div class="menu-content">
+                    <h3>Iced Americano</h3>
+                    <p>Chilled espresso with cold water</p>
+                    <div class="menu-footer">
+                        <span class="menu-price">₹140</span>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-item" data-id="c2">
+                <div class="menu-image">
+                    <img src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735" alt="Frappuccino">
+                </div>
+                <div class="menu-content">
+                    <h3>Chocolate Frappuccino</h3>
+                    <p>Blended coffee with chocolate and cream</p>
+                    <div class="menu-footer">
+                        <span class="menu-price">₹220</span>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-item" data-id="c3">
+                <div class="menu-image">
+                    <img src="https://images.unsplash.com/photo-1499961024600-ad094db305cc" alt="Cold Brew">
+                </div>
+                <div class="menu-content">
+                    <h3>Cold Brew</h3>
+                    <p>Slow-steeped coffee served over ice</p>
+                    <div class="menu-footer">
+                        <span class="menu-price">₹160</span>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-item" data-id="c4">
+                <div class="menu-image">
+                    <img src="https://images.unsplash.com/photo-1592663527359-cf6642f54cff" alt="Iced Latte">
+                </div>
+                <div class="menu-content">
+                    <h3>Iced Caramel Latte</h3>
+                    <p>Chilled espresso with caramel and milk</p>
+                    <div class="menu-footer">
+                        <span class="menu-price">₹200</span>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pastries Section -->
+    <section id="pastries" class="menu-section">
+        <div class="menu-grid">
+            <div class="menu-item" data-id="p1">
+                <div class="menu-image">
+                    <img src="https://images.unsplash.com/photo-1530610476181-d83430b64dcd" alt="Chocolate Croissant">
+                </div>
+                <div class="menu-content">
+                    <h3>Chocolate Croissant</h3>
+                    <p>Flaky pastry filled with rich chocolate</p>
+                    <div class="menu-footer">
+                        <span class="menu-price">₹90</span>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-item" data-id="p2">
+                <div class="menu-image">
+                    <img src="https://images.unsplash.com/photo-1587668178277-295251f900ce" alt="Apple Danish">
+                </div>
+                <div class="menu-content">
+                    <h3>Apple Danish</h3>
+                    <p>Sweet pastry with caramelized apples</p>
+                    <div class="menu-footer">
+                        <span class="menu-price">₹110</span>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-item" data-id="p3">
+                <div class="menu-image">
+                    <img src="https://images.unsplash.com/photo-1605807646983-377bc5a76493" alt="Almond Croissant">
+                </div>
+                <div class="menu-content">
+                    <h3>Almond Croissant</h3>
+                    <p>Buttery croissant with almond filling</p>
+                    <div class="menu-footer">
+                        <span class="menu-price">₹150</span>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-item" data-id="p4">
+                <div class="menu-image">
+                    <img src="https://images.unsplash.com/photo-1509365465985-25d11c17e812" alt="Cinnamon Roll">
+                </div>
+                <div class="menu-content">
+                    <h3>Cinnamon Roll</h3>
+                    <p>Classic pastry with cinnamon filling</p>
+                    <div class="menu-footer">
+                        <span class="menu-price">₹130</span>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="pastries" class="menu-section">
+        <div class="menu-grid">
+         <div class="menu-item" data-id="p1">
+    <img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a" alt="Chocolate Croissant">
+    <div class="menu-item-content">
+        <h3>Chocolate Croissant</h3>
+                    <div class="menu-price">₹120</div>
+                    <p class="menu-description">Buttery croissant with chocolate filling</p>
+                    <button class="add-to-cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        Add to Cart
+                    </button>
+                </div>
+            </div>
+          <div class="menu-item" data-id="p2">
+    <img src="https://images.unsplash.com/photo-1587830076295-3241cffc0d85" alt="Blueberry Muffin">
+    <div class="menu-item-content">
+        <h3>Blueberry Muffin</h3>
+                    <div class="menu-price">₹100</div>
+                    <p class="menu-description">Fresh baked muffin with blueberries</p>
+                    <button class="add-to-cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        Add to Cart
+                    </button>
+                </div>
+            </div>
+            <div class="menu-item" data-id="p3">
+    <img src="https://images.unsplash.com/photo-1586724237569-f3d0c1dee8c6" alt="Danish Pastry">
+    <div class="menu-item-content">
+        <h3>Danish Pastry</h3>
+                    <div class="menu-price">₹110</div>
+                    <p class="menu-description">Sweet pastry with fruit filling</p>
+                    <button class="add-to-cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        Add to Cart
+                    </button>
+                </div>
+            </div>
+           <div class="menu-item" data-id="p4">
+    <img src="https://images.unsplash.com/photo-1509365390695-33aee754301f" alt="Cinnamon Roll">
+    <div class="menu-item-content">
+        <h3>Cinnamon Roll</h3>
+                    <div class="menu-price">₹130</div>
+                    <p class="menu-description">Sweet roll with cinnamon-sugar filling</p>
+                    <button class="add-to-cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        Add to Cart
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Cart Icon -->
     <div class="cart-icon">
@@ -537,27 +704,7 @@
 
     <div class="overlay"></div>
 
-    <!-- Hot Coffee Section -->
-    <section id="hot-coffee" class="menu-section active">
-        <div class="menu-grid">
-            <div class="menu-item" data-id="h1">
-                <div class="menu-image">
-                    <img src="https://images.unsplash.com/photo-1541167760496-1628856ab772" alt="Espresso">
-                </div>
-                <div class="menu-content">
-                    <h3>Classic Espresso</h3>
-                    <p>Rich and intense single shot of pure coffee</p>
-                    <div class="menu-footer">
-                        <span class="menu-price">₹120</span>
-                        <button class="add-to-cart">
-                            <i class="fas fa-shopping-cart"></i>
-                            Add to Cart
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-                <script>
+    <script>
         // Cart functionality
         let cart = [];
         const cartIcon = document.querySelector('.cart-icon');
@@ -567,8 +714,6 @@
         const cartItems = document.querySelector('.cart-items');
         const cartCount = document.querySelector('.cart-count');
         const totalAmount = document.querySelector('.total-amount');
-        const notification = document.getElementById('notification');
-        const successMessage = document.getElementById('successMessage');
 
         // Mobile Menu Toggle
         const menuToggle = document.getElementById('menuToggle');
@@ -610,7 +755,7 @@
             overlay.classList.remove('active');
         });
 
-        // Add to Cart functionality with notification
+        // Add to Cart functionality
         document.querySelectorAll('.add-to-cart').forEach(button => {
             button.addEventListener('click', () => {
                 const menuItem = button.closest('.menu-item');
@@ -620,12 +765,6 @@
                 const image = menuItem.querySelector('img').src;
                 
                 addToCart(id, name, price, image);
-
-                // Show notification
-                notification.classList.add('show');
-                setTimeout(() => {
-                    notification.classList.remove('show');
-                }, 2000);
             });
         });
 
@@ -680,18 +819,14 @@
             }
         }
 
-        // Checkout functionality with success message
+        // Checkout functionality
         document.querySelector('.checkout-btn').addEventListener('click', () => {
             if (cart.length > 0) {
-                successMessage.classList.add('show');
-                
-                setTimeout(() => {
-                    successMessage.classList.remove('show');
-                    cart = [];
-                    updateCart();
-                    cartModal.classList.remove('active');
-                    overlay.classList.remove('active');
-                }, 2000);
+                alert('Thank you for your order! Total amount: ' + totalAmount.textContent);
+                cart = [];
+                updateCart();
+                cartModal.classList.remove('active');
+                overlay.classList.remove('active');
             }
         });
     </script>
