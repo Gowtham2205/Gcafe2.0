@@ -259,8 +259,16 @@
             }
 
             .menu-toggle {
-                display: block;
-            }
+    display: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    position: absolute;  /* Added */
+    right: 20px;        /* Added */
+    top: 50%;           /* Added */
+    transform: translateY(-50%); /* Added */
+    z-index: 1001;      /* Added */
+}
 
             nav ul {
                 position: fixed;
