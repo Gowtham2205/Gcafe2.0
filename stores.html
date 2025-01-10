@@ -41,11 +41,17 @@
             text-decoration: none;
         }
 
+        /* Updated menu-toggle styles */
         .menu-toggle {
             display: none;
             color: white;
             font-size: 1.5rem;
             cursor: pointer;
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1001;
         }
 
         nav ul {
@@ -65,8 +71,7 @@
         nav a:hover {
             color: #e67e22;
         }
-
-        /* Search Bar Styles */
+                /* Search Bar Styles */
         .search-container {
             padding: 2rem 5%;
             background: #fff;
@@ -102,6 +107,7 @@
             transform: translateY(-50%);
             color: #666;
         }
+
         /* Hero Section */
         .hero {
             background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
@@ -256,8 +262,7 @@
         .btn-secondary:hover {
             background: #e0e0e0;
         }
-
-        /* Mobile Responsive Styles */
+                /* Mobile Responsive Styles */
         @media screen and (max-width: 768px) {
             body {
                 padding-top: 60px;
@@ -273,8 +278,6 @@
 
             .menu-toggle {
                 display: block;
-                position: relative;
-                z-index: 1001;
             }
 
             nav ul {
@@ -358,8 +361,7 @@
             <input type="text" class="search-input" placeholder="Search for a location..." id="searchInput">
         </div>
     </div>
-
-    <div class="store-container">
+        <div class="store-container">
         <div class="store-grid">
             <!-- Store 1 -->
             <div class="store-card">
@@ -471,8 +473,7 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Store 4 -->
+                        <!-- Store 4 -->
             <div class="store-card">
                 <img src="https://images.unsplash.com/photo-1521017432531-fbd92d768814" alt="Gcafe MG Road" class="store-image">
                 <div class="store-content">
@@ -550,3 +551,4 @@
     </script>
 </body>
 </html>
+            
